@@ -9,14 +9,14 @@ export default function Home() {
     const search = useContext(SearchContext)
     return (
         <div>
-            <Navbar title="Система поддержки курса “Машинное обучение”" />
+            <Navbar title="Система поддержки курса “Машинное обучение”"/>
             <SearchInput bottom={true} />
             {
                 (search.questionResponse.length && Array.isArray(search.questionResponse)) ? <div>
                     <QuestionsList />
-                    <BottomButton small="Не нашли похожий вопрос?" button="Давайте поищем среди материалов курса" onClick={console.log()} link="" />
+                    <BottomButton small="Не нашли похожий вопрос?" button="Давайте поищем среди материалов курса" onClick={console.log()} link="/courses" />
                 </div> : null
-                    
+
             }
 
         </div>

@@ -6,6 +6,7 @@ import {
 import Home from './pages/Home'
 import { SearchProvider } from './context/SearchContext';
 import axios from 'axios';
+import CoursesSearch from './pages/CoursesSearch';
 
 const axiosInstance = axios.create({
   headers: {
@@ -15,11 +16,12 @@ const axiosInstance = axios.create({
 });
 function App() {
   const [questionsResponse, setQuestionsResponse] = useState([])
+  const [coursesResponse, setCoursesResponse] = useState([])
   const searchForQuestions = (text) => {
     axios.post(`https://bsc-sergeenkov.rc.robotbull.com/api/search-similar-questions`, { question: text })
       .then(res => {
-        console.log(res.data)
         setQuestionsResponse(res.data)
+        console.log(res.data)
       })
   }
   const markQuestion = (id) => {
@@ -29,14 +31,33 @@ function App() {
         setQuestionsResponse([])
       })
   }
+
+  const searchForCourses = (text) => {
+    axios.post(`https://bsc-sergeenkov.rc.robotbull.com/api/search-course-materials`, { question: text })
+      .then(res => {
+        console.log(res.data)
+        setCoursesResponse(res.data)
+      })
+  }
+  const markCourse = (id) => {
+    axios.post(`https://bsc-sergeenkov.rc.robotbull.com/api/mark-material-as-answer`, { type: "courseMaterial", id: id })
+      .then(res => {
+        console.log(res)
+        setCoursesResponse([])
+      })
+  }
   return (
     <SearchProvider value={{
       searchForQuestions: searchForQuestions,
       questionResponse: questionsResponse,
-      markQuestion: markQuestion
+      coursesResponse: coursesResponse,
+      markQuestion: markQuestion,
+      markCourse: markCourse,
+      searchForCourses: searchForCourses
     }}>
       <Router>
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
+        <Route path="/courses" component={CoursesSearch}/>
       </Router>
     </SearchProvider>
 

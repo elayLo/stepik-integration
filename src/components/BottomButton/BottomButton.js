@@ -1,11 +1,15 @@
 import React from 'react'
 import './BottomButton.sass'
+import { Link } from 'react-router-dom'
 
 export default function BottomButton(props) {
     return (
         <div className="bottom-button">
             <p>{props.small}</p>
-            <button onClick={() => props.onClick}>{props.button}</button>
+            {
+                props.link ? <Link to={props.link}><button onClick={() => props.onClick}>{props.button}</button></Link> : <button onClick={() => props.onClick}>{props.button}</button>
+            }
+            
         </div>
     )
 }
