@@ -1,0 +1,70 @@
+@import './../../styles/main.sass'
+    
+.search__results 
+    display: flex 
+    flex-direction: column
+    width: 80%
+    max-width: 870px
+    margin-left: auto
+    margin-right: auto
+    margin-top: 40px
+    .search__result 
+        position: relative
+        margin-bottom: 39px
+        padding: 20px 
+        transition: width 2s ease
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05)
+        border: 1px solid #D8D8D8
+        border-radius: 10px
+        &__answer 
+            margin-top: 10px
+            p 
+                font-size: 18px
+                font-weight: 500
+                span 
+                    font-weight: normal
+        &__title 
+            font-size: 20px
+            font-weight: 500
+
+        &__bottom
+            display: flex 
+            width: 100%
+            margin-top: 20px
+            align-items: center
+            &-score
+                margin-left: 20px
+                p 
+                    font-size: 16px
+            &-img 
+                display: flex
+                align-items: center
+                img 
+                    margin-right: 10px
+                    height: 38px
+                    width: 38px
+                    border-radius: 50%
+                p
+                    font-size: 16px
+        .search__result__arrow
+            position: absolute
+            right: 0
+            top: 0 
+            bottom: 0
+            margin: auto 20px
+        .search__result__bottom-btn
+            margin-left: auto
+            button 
+                outline: none 
+                cursor: pointer
+                color: white
+                border: none
+                font-size: 16px
+                padding: 8px 20px
+                border-radius: 5px
+                background: $main
+    .search__results__title 
+        font-size: 22px
+        margin-bottom: 24px
+        font-weight: 600
+        

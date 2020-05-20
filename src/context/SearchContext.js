@@ -1,9 +1,10 @@
 import React from 'react'
 
 const SearchContext = React.createContext({
-    search: '',
+    questionResponse: [],
     setSearch: (text) => {},
     searchForQuestions: (text) => {},
+    markQuestion: (id) => {},
 })
 
 export const SearchProvider = SearchContext.Provider
