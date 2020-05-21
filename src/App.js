@@ -46,6 +46,12 @@ function App() {
         setCoursesResponse([])
       })
   }
+  const modalSubmit = ({text, email, url}) => {
+    axios.post(`https://bsc-sergeenkov.rc.robotbull.com/api/ask-question-manual`, { text: text, email: email, url: url })
+      .then(res => {
+        console.log(res)
+      })
+  }
   return (
     <SearchProvider value={{
       searchForQuestions: searchForQuestions,
@@ -53,7 +59,8 @@ function App() {
       coursesResponse: coursesResponse,
       markQuestion: markQuestion,
       markCourse: markCourse,
-      searchForCourses: searchForCourses
+      searchForCourses: searchForCourses,
+      modalSubmit: modalSubmit
     }}>
       <Router>
         <Route exact path="/" component={Home} />

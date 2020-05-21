@@ -22,10 +22,10 @@ export default function CoursesItem(props) {
                     <p>Совпадение: <span>{props.score}</span></p>
                 </div>
                 <div className="search__result__url">
-                    <a href={props.url}>Смотреть на Stepik.org</a>
+                    <a href={props.url} target="_blank">Смотреть на Stepik.org</a>
                 </div>
                 <div className="search__result__bottom-btn">
-                    <button style={{ display: isOpened ? 'block' : 'none' }} onClick={() => search.markQuestion(props.django_id)}>Я нашел ответ</button>
+                    <button style={{ display: isOpened ? 'block' : 'none' }} onClick={() => {search.markCourse(props.django_id)}}>Я нашел ответ</button>
                 </div>
             </div>
 

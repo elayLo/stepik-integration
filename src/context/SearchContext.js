@@ -8,6 +8,7 @@ const SearchContext = React.createContext({
     markQuestion: (id) => {},
     searchForCoursess: (text) => {},
     markCourse: (id) => {},
+    modalSubmit: ({text, email, url}) => {}
 })
 
 export const SearchProvider = SearchContext.Provider
