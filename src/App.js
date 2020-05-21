@@ -77,7 +77,7 @@ function App() {
       <Router>
         <Route exact path="/" component={Home} />
         <Route path="/courses" component={CoursesSearch} />
-        <Route path='/redirect:code' render={(props) => <RedirectPage {...props}/>}  />
+        <Route path='/redirect' component={RedirectPage}  />
         <Route path='/stepik' component={() => window.location = 'https://stepik.org/oauth2/authorize/?response_type=code&client_id=G7FYKRNVUPlQKT8HmNvfbyysVUiRBnaFCSDcmBA9&redirect_uri=http://localhost:3000/redirect'} />
       </Router>
 
