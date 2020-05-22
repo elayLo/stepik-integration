@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Navbar.sass'
+import SearchContext from './../../context/SearchContext'
 
 export default function Navbar(props) {
-    const redirectUrl = process.env.REDIRECT_URL || 'http://localhost:3000/redirect'
+    const context = useContext(SearchContext)
     return (
         <div className="navbar">
             <img src={require('./../../assets/logo.svg')} alt="" />
             <p>{props.title}</p>
-            <a href={`https://stepik.org/oauth2/authorize/?response_type=code&client_id=qkK7TLMjWPyNagYoYctrOV0bkcQxVHsVpxWBktVg&redirect_uri=${redirectUrl}`}>Войти через Stepik</a>
+            {
+                context.user.full_name ? <button className="navbar__log-out" onClick={() => {localStorage.clear(); window.location.reload()}}>Выйти</button> : null
+            }
+
         </div>
     )
 }

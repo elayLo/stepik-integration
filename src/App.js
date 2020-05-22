@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -21,7 +21,16 @@ function App() {
   const [questionsResponse, setQuestionsResponse] = useState([])
   const [coursesResponse, setCoursesResponse] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
-  const [user, setUser] = useState({})
+  const [token, setToken] = useState('')
+  const [accessToken, setAccessToken] = useState(() => {
+    const localData = localStorage.getItem('access_token')
+    return localData ? JSON.parse(localData) : []
+  })
+  const [user, setUser] = useState(
+    () => {
+      const localData = localStorage.getItem('user')
+      return localData ? JSON.parse(localData) : []
+    })
   const searchForQuestions = (text) => {
     axios.post(`https://bsc-sergeenkov.rc.robotbull.com/api/search-similar-questions`, { question: text })
       .then(res => {
@@ -29,6 +38,12 @@ function App() {
         console.log(res.data)
       })
   }
+
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('access_token', JSON.stringify(accessToken))
+  }, [user, accessToken])
+
   const goToAuth = () => {
     setLoggedIn(true)
   }
@@ -36,9 +51,26 @@ function App() {
     axios.post(`https://bsc-sergeenkov.rc.robotbull.com/api/mark-material-as-answer`, { type: "question", id: id })
       .then(res => {
         console.log(res)
-        setQuestionsResponse([])
+        setTimeout(() => {
+          setQuestionsResponse([])
+        }, 4000)
       })
-    alert('Вы нашли ответ')
+
+  }
+
+  const fetchUser = (code) => {
+    axios.post(`https://bsc-sergeenkov.rc.robotbull.com/api/auth/login`, { code: code })
+      .then(res => {
+        setUser(res.data.user)
+        setAccessToken(res.data.access_token)
+        setLoggedIn(true)
+        console.log(user)
+        console.log(accessToken)
+      })
+  }
+
+  const setTokenStr = (text) => {
+    setToken(text)
   }
 
   const searchForCourses = (text) => {
@@ -72,12 +104,17 @@ function App() {
       modalSubmit: modalSubmit,
       loggedIn: loggedIn,
       goToAuth: goToAuth,
+      setTokenStr: setTokenStr,
+      token: token,
+      user: user,
+      accessToken: accessToken,
+      fetchUser: fetchUser,
     }}>
 
       <Router>
         <Route exact path="/" component={Home} />
         <Route path="/courses" component={CoursesSearch} />
-        <Route path='/redirect' component={RedirectPage}  />
+        <Route path='/redirect' component={RedirectPage} />
         <Route path='/stepik' component={() => window.location = 'https://stepik.org/oauth2/authorize/?response_type=code&client_id=G7FYKRNVUPlQKT8HmNvfbyysVUiRBnaFCSDcmBA9&redirect_uri=http://localhost:3000/redirect'} />
       </Router>
 

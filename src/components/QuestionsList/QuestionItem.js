@@ -26,7 +26,7 @@ export default function QuestionItem(props) {
                     <p>Совпадение: <span>{props.score}</span></p>
                 </div>
                 <div className="search__result__bottom-btn">
-                    <button style={{ display: isOpened ? 'block' : 'none' }} onClick={() => search.markQuestion(props.django_id)}>Я нашел ответ</button>
+                    <button style={{ display: isOpened ? 'block' : 'none' }} onClick={() => {search.markQuestion(props.django_id); props.open(true)}}>Я нашел ответ</button>
                 </div>
             </div>
 
