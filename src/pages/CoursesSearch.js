@@ -35,9 +35,9 @@ export default function CoursesSearch() {
                     }
                 </div>
                     : <div className="bottom-button">
-                        <p>Все еще не нашли то, что искали?</p>
+                        <p>Перед использованием сервиса, нужно авторизоваться</p>
                         <a href={`https://stepik.org/oauth2/authorize/?response_type=code&client_id=qkK7TLMjWPyNagYoYctrOV0bkcQxVHsVpxWBktVg&redirect_uri=${redirectUrl}`}>
-                            <button>Задать вопрос преподавателю</button>
+                            <button>Авторизоваться через Stepik.org</button>
                         </a>
 
                     </div>
