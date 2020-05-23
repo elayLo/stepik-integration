@@ -22,6 +22,7 @@ function App() {
   const [coursesResponse, setCoursesResponse] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
   const [token, setToken] = useState('')
+  const [globalInput, setGlobalInput] = useState('')
   const [accessToken, setAccessToken] = useState(() => {
     const localData = localStorage.getItem('access_token')
     return localData ? JSON.parse(localData) : []
@@ -56,6 +57,10 @@ function App() {
         }, 4000)
       })
 
+  }
+
+  const setInput = (text) => {
+    setGlobalInput(text)
   }
 
   const fetchUser = (code) => {
@@ -104,6 +109,8 @@ function App() {
       modalSubmit: modalSubmit,
       loggedIn: loggedIn,
       goToAuth: goToAuth,
+      setInput: setInput,
+      globalInput: globalInput,
       setTokenStr: setTokenStr,
       token: token,
       user: user,

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import './Modal.sass'
 import SearchContext from '../../context/SearchContext'
 
@@ -7,6 +7,9 @@ export default function Modal(props) {
     const [text, setText] = useState('')
     const [url, setUrl] = useState('')
     const [email, setEmail] = useState('')
+    useEffect(() => {
+        setText(search.globalInput)
+    }, [])
     return (
         <div className="modal">
             <div className="modal__main">
